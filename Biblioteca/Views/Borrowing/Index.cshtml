@@ -1,0 +1,43 @@
+﻿@model Biblioteca.Models.BurrowViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Burrow</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Title
+            </th>
+            <th>
+                Author
+            </th>
+            <th>
+                ISBN
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Books)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Author)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ISBN)
+                </td>
+                <td>
+                    <a asp-action="Borrow" asp-route-memberId="@Model.MemberId" asp-route-bookId="@item.Id">Borrow</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
