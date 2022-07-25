@@ -44,8 +44,8 @@
                     @Html.DisplayFor(modelItem => item.Phone)
                 </td>
                 <td>
-                    <a asp-controller="Borrowing" asp-action="Index" asp-route-id="@item.Id">Borrow Book</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                    <a asp-controller="Borrowing" asp-action="Index" asp-route-id="@item.Id" class="btn btn-success">Borrow Book</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary">Details</a>
                 </td>
             </tr>
         }

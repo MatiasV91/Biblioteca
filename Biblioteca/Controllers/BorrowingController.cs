@@ -1,4 +1,5 @@
-﻿using Biblioteca.Models;
+﻿using Biblioteca.Helpers;
+using Biblioteca.Models;
 using Biblioteca.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,7 +16,7 @@ namespace Biblioteca.Controllers
 
         public async Task<IActionResult> Index(int id)
         {
-            var vm = new BurrowViewModel
+            var vm = new BorrowViewModel
             {
                 Books = await _unitOfWork.Books.GetAll(),
                 MemberId = id
@@ -25,7 +26,13 @@ namespace Biblioteca.Controllers
 
         public async Task<IActionResult> Borrow(int memberId, int bookId)
         {
-            var borrow = new Borrowing { BookId = bookId, MemberId = memberId };
+            var member = await _unitOfWork.Members.Get(m => m.Id == memberId);
+            var book = await _unitOfWork.Books.Get(b => b.Id == bookId);
+            if (member == null || book == null)
+            {
+                return NotFound();
+            }
+            var borrow = new Borrowing { Member = member, Book = book, BookId = bookId, MemberId = memberId };
             return View(borrow);
         }
 
@@ -33,20 +40,57 @@ namespace Biblioteca.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Borrow(Borrowing borrow)
         {
-            var member = await _unitOfWork.Members.Get(m => m.Id == borrow.MemberId);
             var book = await _unitOfWork.Books.Get(b => b.Id == borrow.BookId);
-            if (member == null || book == null)
+            if (book.CopiesAvailable == 0)
             {
-                return NotFound();
+                ModelState.AddModelError("", "No Copies Available to Borrow");
             }
+
+            if (await _unitOfWork.Books.HasUnreturnedBook(borrow.MemberId,borrow.BookId))
+            {
+                ModelState.AddModelError("", "The Book Has already been borrowed and wasn't returned");
+            }
+
             if (ModelState.IsValid)
             {
                 borrow.DateBorrowed = DateTime.Now;
+                --book.CopiesAvailable;
+                _unitOfWork.Books.Update(book);
                 await _unitOfWork.Borrowings.Insert(borrow);
                 await _unitOfWork.Save();
                 return RedirectToAction(actionName: "Details", controllerName: "ManageMembers", routeValues: new { id = borrow.MemberId });
             }
             return View(borrow);
         }
+
+        public async Task<IActionResult> Return(int id)
+        {
+            var borrowing = await _unitOfWork.Borrowings.Get(b => b.Id == id, new List<string> { "Member", "Book" });
+            if (borrowing == null)
+            {
+                return NotFound();
+            }
+            borrowing.DateReturned = DateTime.Now;
+            borrowing.CalculateFine();
+            return View(borrowing);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Return(Borrowing borrow)
+        {
+            if (ModelState.IsValid)
+            {
+                _unitOfWork.Borrowings.Update(borrow);
+                var book = await _unitOfWork.Books.Get(b => b.Id == borrow.BookId);
+                ++book.CopiesAvailable;
+                _unitOfWork.Books.Update(book);
+                await _unitOfWork.Save();
+                return RedirectToAction(actionName: "Details", controllerName: "ManageMembers", routeValues: new { id = borrow.MemberId });
+            }
+            return View(borrow);
+        }
+
+
     }
 }

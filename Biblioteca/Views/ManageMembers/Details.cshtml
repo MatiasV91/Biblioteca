@@ -3,14 +3,11 @@
 @{
     ViewData["Title"] = "Details";
 }
-
-<h1>Details</h1>
-
 <div>
-    <h4>Member</h4>
-
-    <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary">Edit</a> 
-    <a asp-action="Delete" asp-route-id="@Model?.Id" class="btn btn-danger">Delete</a> 
+    <h1>Member</h1>
+    <a asp-controller="Borrowing" asp-action="Index" asp-route-id="@Model.Id" class="btn btn-success">Borrow Book</a>
+    <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary">Edit</a>
+    <a asp-action="Delete" asp-route-id="@Model?.Id" class="btn btn-danger">Delete</a>
     <a asp-action="Index" class="btn btn-secondary">Back to List</a>
     <hr />
     <dl class="row">
@@ -46,6 +43,9 @@
             <tr>
                 <th>Title</th>
                 <th>Date Borrowed</th>
+                <th>Amount of days</th>
+                <th>Expected return Date</th>
+                <th>Date Returned</th>
             </tr>
         </thead>
         <tbody>
@@ -54,11 +54,22 @@
                 <tr>
                     <td>@borrow.Book.Title</td>
                     <td>@borrow.DateBorrowed</td>
+                    <td>@borrow.AmountOfDays</td>
+                    <td>@borrow.DateBorrowed.AddDays(borrow.AmountOfDays).ToShortDateString()</td>
+                    <td>
+                        @if (borrow.DateReturned != null)
+                        {
+                            <div>@borrow.DateReturned</div>
+                        }
+                        else
+                        {
+                            <a asp-action="Return" asp-controller="Borrowing" asp-route-id="@borrow.Id" class="btn btn-success">Return</a>
+                        }
+
                 </tr>
             }
         </tbody>
     </table>
 </div>
 <div>
-
 </div>

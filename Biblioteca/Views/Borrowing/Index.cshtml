@@ -1,11 +1,11 @@
-﻿@model Biblioteca.Models.BurrowViewModel
+﻿@model Biblioteca.Models.BorrowViewModel
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Burrow</h1>
-
+<h1>Borrow</h1>
+    <a asp-action="Index" asp-controller="ManageMembers" class="btn btn-secondary">Back to List</a>
 <table class="table">
     <thead>
         <tr>
@@ -17,6 +17,9 @@
             </th>
             <th>
                 ISBN
+            </th>
+            <th>
+                Copies Available
             </th>
             <th></th>
         </tr>
@@ -35,7 +38,17 @@
                     @Html.DisplayFor(modelItem => item.ISBN)
                 </td>
                 <td>
-                    <a asp-action="Borrow" asp-route-memberId="@Model.MemberId" asp-route-bookId="@item.Id">Borrow</a>
+                    @Html.DisplayFor(modelItem => item.CopiesAvailable)
+                </td>
+                <td>
+                    @if (item.CopiesAvailable == 0)
+                    {
+                        <div>No Available Copies </div>
+                    }
+                    else
+                    {
+                        <a asp-action="Borrow" asp-route-memberId="@Model.MemberId" asp-route-bookId="@item.Id" class="btn btn-success">Borrow</a>
+                    }
                 </td>
             </tr>
         }

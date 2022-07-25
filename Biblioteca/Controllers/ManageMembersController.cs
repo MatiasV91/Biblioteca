@@ -37,7 +37,7 @@ namespace Biblioteca.Controllers
             {
                 return NotFound();
             }
-
+            member.Borrowings = member.Borrowings.OrderByDescending(d => d.DateBorrowed).ToList();
             return View(member);
         }
 
@@ -97,7 +97,7 @@ namespace Biblioteca.Controllers
                 {
                     var b = await _unitOfWork.Members.Get(b => b.Id == id);
 
-                    if (b != null)
+                    if (b == null)
                     {
                         return NotFound();
                     }

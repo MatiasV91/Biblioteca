@@ -5,7 +5,7 @@ namespace Biblioteca.Repositories
     public interface IUnitOfWork : IDisposable
     {
         Task Save();
-        IGenericRepository<Book> Books { get; }
+        IBookRepository Books { get; }
         IGenericRepository<Member> Members{ get; }
         IGenericRepository<Borrowing> Borrowings { get; }
     }

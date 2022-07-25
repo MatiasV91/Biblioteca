@@ -13,6 +13,7 @@ namespace Biblioteca.Models
         public DateTime? DateReturned { get; set; }
 
         public int AmountOfDays { get; set; }
+        public decimal FinePay { get; set; }
 
     }
 }

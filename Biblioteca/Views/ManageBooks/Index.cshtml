@@ -22,7 +22,7 @@
                 @Html.DisplayNameFor(model => model.ISBN)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IsAvailable)
+                @Html.DisplayNameFor(model => model.CopiesAvailable)
             </th>
             <th></th>
         </tr>
@@ -41,7 +41,7 @@
                     @Html.DisplayFor(modelItem => item.ISBN)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.IsAvailable)
+                    @Html.DisplayFor(modelItem => item.CopiesAvailable)
                 </td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
