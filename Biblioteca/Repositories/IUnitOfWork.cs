@@ -6,7 +6,7 @@ namespace Biblioteca.Repositories
     {
         Task Save();
         IBookRepository Books { get; }
-        IGenericRepository<Member> Members{ get; }
+        IMemberRepository Members { get; }
         IGenericRepository<Borrowing> Borrowings { get; }
     }
 }

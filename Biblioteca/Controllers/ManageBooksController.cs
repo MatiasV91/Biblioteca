@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using Biblioteca.Data;
 using Biblioteca.Models;
 using Biblioteca.Repositories;
+using Biblioteca.Models.ViewModels;
+using Biblioteca.Models.Filters;
 
 namespace Biblioteca.Controllers
 {
@@ -22,10 +24,14 @@ namespace Biblioteca.Controllers
 
 
         // GET: ManageBooks
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(BooksFilters filters)
         {
-            return View(await _unitOfWork.Books.GetAll());
-                          
+            var vm = new BooksIndexViewModel
+            {
+                Books = await _unitOfWork.Books.GetFilteredBooks(filters),
+                Filters = filters
+            };
+            return View(vm);
         }
 
         // GET: ManageBooks/Details/5

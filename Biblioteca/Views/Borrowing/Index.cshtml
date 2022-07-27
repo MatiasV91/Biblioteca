@@ -1,4 +1,4 @@
-﻿@model Biblioteca.Models.BorrowViewModel
+﻿@model BorrowViewModel
 
 @{
     ViewData["Title"] = "Index";
@@ -6,6 +6,18 @@
 
 <h1>Borrow</h1>
     <a asp-action="Index" asp-controller="ManageMembers" class="btn btn-secondary">Back to List</a>
+    <br />
+    <br />
+    <form asp-controller="Borrowing" asp-action="Index">
+    <p>
+        <input type="hidden" name="id" value="@Model.MemberId" />
+        Title: <input type="text" name="TitleSearch" />
+        Author: <input type="text" name="AuthorSearch" />
+        ISBN: <input type="text" name="ISBNSearch" />
+        <input type="submit" value="Filter" />
+         <input asp-action="index" type="submit" value="Reset" />
+    </p>
+</form>
 <table class="table">
     <thead>
         <tr>
@@ -54,3 +66,23 @@
         }
     </tbody>
 </table>
+
+
+<form asp-controller="Borrowing" asp-action="Index" style="display:inline">
+        <input type="hidden" name="id" value="@Model.MemberId" />
+        <input hidden name="TitleSearch" value="@Model.Filters.TitleSearch" />
+        <input hidden name="ISBN" value="@Model.Filters.ISBNSearch" />
+        <input hidden name="AuthorSearch" value="@Model.Filters.AuthorSearch" />
+        <input hidden name="CurrentPage" value="@(Model.Filters.CurrentPage - 1)" />
+        <input type="submit" value="Previous" class="btn btn-outline-dark @(Model.Books.HasPreviousPage ? "" : "disabled")"/>
+
+</form>
+<form asp-controller="Borrowing" asp-action="Index" style="display:inline">
+        <input type="hidden" name="id" value="@Model.MemberId" />
+        <input hidden name="TitleSearch" value="@Model.Filters.TitleSearch" />
+        <input hidden name="ISBN" value="@Model.Filters.ISBNSearch" />
+        <input hidden name="AuthorSearch" value="@Model.Filters.AuthorSearch" />
+        <input hidden name="CurrentPage" value="@(Model.Filters.CurrentPage + 1)" />
+        <input type="submit" value="Next" class="btn btn-outline-dark @(Model.Books.HasNextPage ? "" : "disabled")"/>
+
+</form>

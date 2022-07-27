@@ -1,34 +1,47 @@
-﻿@model IEnumerable<Biblioteca.Models.Book>
+﻿@model BooksIndexViewModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Books";
 }
 
-<h1>Index</h1>
+<h1>Books</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-info">Create New</a>
 </p>
+<form asp-controller="ManageBooks" asp-action="Index">
+    <p>
+        Title: <input type="text" name="TitleSearch" />
+        Author: <input type="text" name="AuthorSearch" />
+        ISBN: <input type="text" name="ISBNSearch" />
+        <input type="submit" value="Filter" />
+         <input asp-action="index" type="submit" value="Reset" />
+
+    </p>
+</form>
+
+       
+
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Title)
+                Title
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Author)
+                Author
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ISBN)
+                ISBN)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CopiesAvailable)
+               Copies Available
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var item in Model.Books)
         {
             <tr>
                 <td>
@@ -44,11 +57,30 @@
                     @Html.DisplayFor(modelItem => item.CopiesAvailable)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
                 </td>
             </tr>
         }
     </tbody>
 </table>
+
+<form asp-controller="ManageBooks" asp-action="Index" style="display:inline">
+
+        <input hidden name="TitleSearch" value="@Model.Filters.TitleSearch" />
+        <input hidden name="ISBN" value="@Model.Filters.ISBNSearch" />
+        <input hidden name="AuthorSearch" value="@Model.Filters.AuthorSearch" />
+        <input hidden name="CurrentPage" value="@(Model.Filters.CurrentPage - 1)" />
+        <input type="submit" value="Previous" class="btn btn-outline-dark @(Model.Books.HasPreviousPage ? "" : "disabled")"/>
+
+</form>
+<form asp-controller="ManageBooks" asp-action="Index" style="display:inline">
+
+        <input hidden name="TitleSearch" value="@Model.Filters.TitleSearch" />
+        <input hidden name="ISBN" value="@Model.Filters.ISBNSearch" />
+        <input hidden name="AuthorSearch" value="@Model.Filters.AuthorSearch" />
+        <input hidden name="CurrentPage" value="@(Model.Filters.CurrentPage + 1)" />
+        <input type="submit" value="Next" class="btn btn-outline-dark @(Model.Books.HasNextPage ? "" : "disabled")"/>
+
+</form>

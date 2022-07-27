@@ -1,5 +1,7 @@
 ﻿using Biblioteca.Helpers;
 using Biblioteca.Models;
+using Biblioteca.Models.Filters;
+using Biblioteca.Models.ViewModels;
 using Biblioteca.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,12 +16,13 @@ namespace Biblioteca.Controllers
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<IActionResult> Index(int id)
+        public async Task<IActionResult> Index(int id,BooksFilters filters)
         {
             var vm = new BorrowViewModel
             {
-                Books = await _unitOfWork.Books.GetAll(),
-                MemberId = id
+                Books = await _unitOfWork.Books.GetFilteredBooks(filters),
+                MemberId = id,
+                Filters = filters
             };
             return View(vm);
         }

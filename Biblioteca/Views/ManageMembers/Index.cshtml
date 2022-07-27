@@ -1,34 +1,44 @@
-﻿@model IEnumerable<Biblioteca.Models.Member>
+﻿@model MembersIndexViewModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Members";
 }
 
-<h1>Index</h1>
+<h1>Members</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-info">Create New</a>
 </p>
+
+<form asp-controller="ManageMembers" asp-action="Index">
+    <p>
+        First Name: <input type="text" name="FirstName" />
+        Last Name: <input type="text" name="LastName" />
+        <input type="submit" value="Filter" />
+        <input asp-action="index" type="submit" value="Reset" />
+    </p>
+</form>
+
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.FirstName)
+                First Name
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.LastName)
+                Last Name
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Address)
+                Address
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Phone)
+                Phone
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var item in Model.Members)
         {
             <tr>
                 <td>
@@ -51,3 +61,19 @@
         }
     </tbody>
 </table>
+<form asp-controller="ManageMembers" asp-action="Index" style="display:inline">
+
+        <input hidden name="FirstName" value="@Model.Filters.FirstName" />
+        <input hidden name="LastName" value="@Model.Filters.LastName" />
+        <input hidden name="CurrentPage" value="@(Model.Filters.CurrentPage - 1)" />
+        <input type="submit" value="Previous" class="btn btn-outline-dark @(Model.Members.HasPreviousPage ? "" : "disabled")"/>
+
+</form>
+<form asp-controller="ManageMembers" asp-action="Index" style="display:inline">
+
+        <input hidden name="FirstName" value="@Model.Filters.FirstName" />
+        <input hidden name="LastName" value="@Model.Filters.LastName" />
+        <input hidden name="CurrentPage" value="@(Model.Filters.CurrentPage + 1)" />
+        <input type="submit" value="Next" class="btn btn-outline-dark @(Model.Members.HasNextPage ? "" : "disabled")"/>
+
+</form>

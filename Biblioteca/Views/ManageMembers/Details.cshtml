@@ -6,7 +6,7 @@
 <div>
     <h1>Member</h1>
     <a asp-controller="Borrowing" asp-action="Index" asp-route-id="@Model.Id" class="btn btn-success">Borrow Book</a>
-    <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary">Edit</a>
+    <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-warning">Edit</a>
     <a asp-action="Delete" asp-route-id="@Model?.Id" class="btn btn-danger">Delete</a>
     <a asp-action="Index" class="btn btn-secondary">Back to List</a>
     <hr />
