@@ -2,7 +2,115 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+@*HEADER*@
+<header class="d-flex align-items-center heading full-width">
+    <div class="container">
+        <div class="row">
+            <div class="col text-center">
+                <h1 class="text-light display-1">Library</h1>
+            </div>
+        </div>
+    </div>
+</header>
+
+@*RECOMENDED BOOKS*@
+<section class="suggested-books">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 text-center py-5">
+                <h1 class="text-secondary text-uppercase display-3">Suggested Books</h1>
+            </div>
+
+            <div class="col-4">
+                <div class="card text-center">
+                    <div class="card-header">
+                        <h5 class="card-title">Don Quixote</h5>
+                    </div>
+                    <div class="card-body">
+                        <img src="~/images/Don_Quixote.jpg" class="img-fluid rounded" />
+                    </div>
+                    <div class="card-footer">
+                        <h5 class="card-title">Miguel de Cervantes</h5>
+                        <p class="card-text">The plot revolves around the adventures of a member of the lowest nobility, an hidalgo from La Mancha named Alonso Quijano, who reads so many chivalric romances that he either loses or pretends to have lost his mind in order to become a knight-errant (caballero errante) to revive chivalry and serve his nation, under the name Don Quixote de la Mancha </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="card text-center">
+                    <div class="card-header">
+                        <h5 class="card-title">1984</h5>
+                    </div>
+                    <div class="card-body">
+                        <img src="~/images/1984.jpg" class="img-fluid rounded" />
+                    </div>
+                    <div class="card-footer">
+                        <h5 class="card-title">George Orwell</h5>
+                        <p class="card-text">1984 Follows the life of Winston Smith, a low ranking member of 'the Party', who is frustrated by the omnipresent eyes of the party, and its ominous ruler Big Brother. 'Big Brother' controls every aspect of people's lives</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="card text-center">
+                    <div class="card-header">
+                        <h5 class="card-title">Brothers Karamazov</h5>
+                    </div>
+                    <div class="card-body">
+                        <img src="/images/Brothers_Karamazov.jpg" class="img-fluid rounded" />
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Fiódor Dostoyevski</h5>
+                        <p class="card-text">Set in 19th-century Russia, The Brothers Karamazov is a passionate philosophical novel that enters deeply into questions of God, free will, and morality. It is a theological drama dealing with problems of faith, doubt, and reason in the context of a modernizing Russia, with a plot that revolves around the subject of patricide. </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@*CONTACT*@
+<section class="contact-us p-5 bg-light">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h1 class="display-3">Contact Us</h1>
+                <h1 class="display-3">To check if a book is available</h1>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-6">
+                     <form class="text-muted">
+                        <div class="form-group">
+                            <label for="name">Name:</label>
+                            <input type="text" class="form-control" id="name" />
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="text" class="form-control" id="email" />
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message:</label>
+                            <textarea class="form-control" id="message" rows="3"></textarea>
+                        </div>
+                        <button class="btn btn-outline-dark btn-block" type="submit">Submit Question</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@*FOOTER*@
+<section class="footer bg-secondary">
+    <div class="container py-5">
+        <div class="row">
+            <div class="col text-center">
+                <h1 class="display-5 text-white">Our Social Networks</h1>
+                <div class=py-2>
+                    <a href="#"><i class="fa-brands fa-facebook fa-3x"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram fa-3x text-warning"></i></a>
+                    <a href="#"><i class="fa-brands fa-twitter fa-3x"></i></a>
+                    <a href="#"><i class="fa-brands fa-youtube fa-3x text-danger"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

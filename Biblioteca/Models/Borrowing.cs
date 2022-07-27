@@ -11,7 +11,7 @@ namespace Biblioteca.Models
         public Book? Book{ get; set; }
         public DateTime DateBorrowed { get; set; }
         public DateTime? DateReturned { get; set; }
-
+        [Range(1,60,ErrorMessage ="Must Be Between 1 and 60 days")]
         public int AmountOfDays { get; set; }
         public decimal FinePay { get; set; }
 
