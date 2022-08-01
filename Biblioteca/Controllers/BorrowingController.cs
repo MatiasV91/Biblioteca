@@ -3,10 +3,12 @@ using Biblioteca.Models;
 using Biblioteca.Models.Filters;
 using Biblioteca.Models.ViewModels;
 using Biblioteca.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Biblioteca.Controllers
 {
+    [Authorize]
     public class BorrowingController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

@@ -10,9 +10,11 @@ using Biblioteca.Models;
 using Biblioteca.Repositories;
 using Biblioteca.Models.ViewModels;
 using Biblioteca.Models.Filters;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Biblioteca.Controllers
 {
+    [Authorize]
     public class ManageMembersController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

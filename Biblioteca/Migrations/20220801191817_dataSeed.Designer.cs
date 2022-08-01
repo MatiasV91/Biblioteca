@@ -4,6 +4,7 @@ using Biblioteca.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Biblioteca.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220801191817_dataSeed")]
+    partial class dataSeed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -279,7 +281,7 @@ namespace Biblioteca.Migrations
                         {
                             Id = 3,
                             AmountOfDays = 7,
-                            BookId = 14,
+                            BookId = 1,
                             DateBorrowed = new DateTime(2022, 8, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FinePay = 0m,
                             MemberId = 1
@@ -600,24 +602,6 @@ namespace Biblioteca.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "21361211-21eb-45c7-8e79-4855d4663438",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "1928c4d2-9dae-4609-87e0-c02a46b30c77",
-                            Email = "admin@library.com",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "ADMIN@LIBRARY.COM",
-                            NormalizedUserName = "ADMIN@LIBRARY.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEKhO2ZS4jkKO7KEgQkiqIrr0ieGGe/bJyR5yfYSme2tTfFIkdvCxosaA9LyMAIiKYQ==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "8c657b09-4ad0-4df3-a4aa-760f91956c13",
-                            TwoFactorEnabled = false,
-                            UserName = "admin@library.com"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
