@@ -21,15 +21,15 @@ namespace Biblioteca.Repositories
             var query = _context.Books.AsQueryable();
             if (!String.IsNullOrEmpty(filters.AuthorSearch))
             {
-                query = query.Where(b => b.Author.Contains(filters.AuthorSearch));
+                query = query.Where(b => b.Author.ToLower().Contains(filters.AuthorSearch.ToLower()));
             }
             if (!String.IsNullOrEmpty(filters.TitleSearch))
             {
-                query = query.Where(b => b.Title.Contains(filters.TitleSearch));
+                query = query.Where(b => b.Title.ToLower().Contains(filters.TitleSearch.ToLower()));
             }
             if (!String.IsNullOrEmpty(filters.ISBNSearch))
             {
-                query = query.Where(b => b.ISBN.Contains(filters.ISBNSearch));
+                query = query.Where(b => b.ISBN.ToLower().Contains(filters.ISBNSearch.ToLower()));
             }
             return await PaginatedList<Book>.CreateAsync(query, filters.CurrentPage, filters.PageSize);
         }

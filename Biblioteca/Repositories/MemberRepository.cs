@@ -15,11 +15,11 @@ namespace Biblioteca.Repositories
             var query = _context.Members.AsQueryable();
             if (!String.IsNullOrEmpty(filters.FirstName))
             {
-                query = query.Where(b => b.FirstName.Contains(filters.FirstName));
+                query = query.Where(b => b.FirstName.ToLower().Contains(filters.FirstName.ToLower()));
             }
             if (!String.IsNullOrEmpty(filters.LastName))
             {
-                query = query.Where(b => b.LastName.Contains(filters.LastName));
+                query = query.Where(b => b.LastName.ToLower().Contains(filters.LastName.ToLower()));
             }
             return await PaginatedList<Member>.CreateAsync(query, filters.CurrentPage, filters.PageSize);
         }
