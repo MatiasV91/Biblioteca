@@ -1,5 +1,5 @@
 # Biblioteca App
-Hecho C# y .NET 6
+Hecho con C# y .NET 6
 
 Sistema de Administracion de una biblioteca
 
