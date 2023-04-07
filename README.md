@@ -24,7 +24,6 @@ Prestamo de Libros, Calculo de Stock, Calculo de Multa por devolucion atrasada y
 * Visual Studio
 * GIT
 
-[DEMO](https://bliblioteca.herokuapp.com/)
 
 ![alt text](https://github.com/MatiasV91/Biblioteca/blob/master/Images/Books.PNG)
 ![alt text](https://github.com/MatiasV91/Biblioteca/blob/master/Images/Members.PNG)
